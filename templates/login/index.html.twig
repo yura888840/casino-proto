@@ -10,24 +10,35 @@
             <div class="col-lg-8 col-md-8 col-sm-12">
                 <!-- начало столбца для контента -->
 
-                {% if error %}
-                    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
+                <main>
+                    <header style="margin-top: 20px">
+                        <h1>Login</h1>
+                    </header>
 
-                <form action="{{ path('login') }}" method="post">
-                    <label for="username">Email:</label>
-                    <input type="text" id="username" name="_username" value="{{ last_username }}"/>
 
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="_password"/>
+                    <article>
 
-                    {# If you want to control the URL the user is redirected to on success
-        <input type="hidden" name="_target_path" value="/account"/> #}
+                        <div class="row main-block">
+                        {% if error %}
+                            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
 
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                    <button type="submit">login</button>
-                </form>
+                        <form action="{{ path('login') }}" method="post">
+                            <label for="username">Email:</label>
+                            <input type="text" id="username" name="_username" value="{{ last_username }}"/>
 
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="_password"/>
+
+                            {# If you want to control the URL the user is redirected to on success
+                <input type="hidden" name="_target_path" value="/account"/> #}
+
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <button type="submit">login</button>
+                        </form>
+                        </div>
+                    </article>
+                </main>
 
             </div> <!-- конец столбца для контента -->
             <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
