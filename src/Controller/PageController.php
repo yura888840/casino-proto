@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Casino;
 use App\Entity\Page;
 use App\Repository\CasinoRepository;
 use App\Repository\PageRepository;
@@ -47,7 +48,8 @@ class PageController extends AbstractController
      */
     public function casinoPage(Request $request, string $casinoName, CasinoRepository $repository): Response
     {
-        $casino = $repository->findBy(['name' => $casinoName]);
+        /** @var Casino $casino */
+        $casino = $repository->findOneBy(['name' => $casinoName]);
 
         if (!$casino) {
             return $this->redirect($this->generateUrl('main'));
@@ -55,7 +57,10 @@ class PageController extends AbstractController
 
         return $this->render(
             'pages/casino.html.twig',
-            []
+            [
+                'page' => $casino->getPage(),
+                'casino' => $casino,
+            ]
         );
     }
 

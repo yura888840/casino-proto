@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container" style="margin-top: 20px">
+    <div class="row">
+
+        <div class="col-lg-3 col-md-3 col-sm-12 column-left">
+            {{ casino.logo | raw }}
+            {{ include('_parts/casino_table.html.twig') }}
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            {{ page.content1 | raw }}
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            {{ page.contentTable | raw }}
+        </div>
+
+    </div> <!-- конец столбца row -->
+</div> <!-- конец столбца container -->
+
+<div class="container" style="margin-top: 20px">
+    <div class="row">
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            {{ page.content2 | raw }}
+        </div>
+
+    </div> <!-- конец столбца row -->
+</div> <!-- конец столбца container -->
+{% endblock %}
