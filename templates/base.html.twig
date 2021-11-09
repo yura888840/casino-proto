@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{ page.title }}</title>
+        <meta http-equiv="Content-Language" content="ru">
+        <meta name="description" content="{{ page.description }}">
+        <meta name="keywords"    content="{{ page.keywords }}">
+
+        {{ page.addition }}
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="_css/font-awesome.css" rel="stylesheet">
+        <link href="_css/mystyles.css" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon/favicon.ico" type="image/x-icon">
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body>
+        {{ include('_parts/menu_top.html.twig') }}
+        {% block body %}{% endblock %}
+
+        {{ include('_parts/menu_bottom.html.twig') }}
+
+        {{ include('_parts/footer.html.twig') }}
+</body>
+</html>

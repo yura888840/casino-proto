@@ -1,0 +1,298 @@
+body{
+    font-family: Tahoma;
+    font-size: 12pt;
+    padding: 0;
+    margin: 0;
+}
+
+body main article{
+    font-size: 12pt;	
+}
+
+
+
+
+/*
+	нижнее меню
+*/
+.nav-bottom
+{
+	text-align: center;
+	padding: 20px 15%;
+	margin-top: 20px;
+}
+.nav-bottom a
+{
+	font-size: 0.8em;
+	color: whitesmoke;
+	text-decoration: none;
+	display: inline-block;
+	margin: 0 10px;
+}
+.nav-bottom a:hover
+{
+	text-decoration: underline;
+}
+
+
+
+
+
+
+.nav_liner
+{
+	margin-top: 20px;
+	font-size:  0.8em;
+}
+.nav_liner p
+{
+}
+.nav_liner a
+{
+	text-decoration: none;
+	display: inline-block;
+}
+.nav_liner a:hover
+{
+	text-decoration: underline;
+}
+
+
+
+
+
+/*
+	меню бокового рейтинга
+*/
+.rating-block
+{
+	margin-top: 20px;
+	
+}
+
+
+.rating-block .rating-first
+{
+	width: 100%;
+	color: whitesmoke;
+	text-align: center;
+	border-bottom: 4px solid #232323;
+	padding-bottom: 20px;
+}
+.rating-block .rating-first img
+{
+	display: block;
+	margin: 10px auto;
+	border: 3px red;
+}
+.rating-block .rating-first a
+{
+	color: white;
+	text-decoration: none;
+}
+.rating-block .rating-first a:hover
+{
+	text-decoration: underline;
+}
+
+
+.rating-block .rating-casino
+{
+	width: 100%;
+	color: whitesmoke;
+	text-align: left;
+	border-bottom: 4px solid #232323;
+}
+.rating-block .rating-casino img
+{
+	display: inline-block;
+	margin: 10px;
+	width:  140px;
+}
+.rating-block .rating-casino a
+{
+	color: white;
+	text-decoration: none;
+}
+.rating-block .rating-casino a:hover
+{
+	text-decoration: underline;
+}
+
+
+
+/*
+меню для блоков главной страницы
+*/
+.main-block
+{
+	width: 100%;
+	margin: 0 0 25px 0;
+}
+.main-block div
+{
+	-border: 1px solid black;
+}
+	.main-block .main-block-img  /*  для первого блока  */
+	{
+
+		padding: 5px;
+	}
+		.main-block .main-block-img  img
+		{
+			width: 100%;
+			max-width: 500px;
+		}
+	.main-block .main-block-txt  /*  для второго блока  */
+	{
+		padding: 7px 15px;
+	}
+		.main-block .main-block-txt  a /*  для второго блока  */
+		{
+			display: block;
+			background: #FF6600;
+			color: white;
+			padding: 10px;
+			width: 90%;
+			border-radius: 5px;
+			margin: 0 auto;
+			margin-top: 10px;
+			text-align: center;
+		}
+
+
+/*
+	стили для представления описания казино
+*/
+
+.column-left
+{
+	padding: 0;
+	text-align: center;
+}
+
+img.casino-logo
+{
+	width: 90%;
+	max-width: 500px;
+	margin: 0 auto 20px;
+}
+
+table.table > tbody> tr > th
+{
+	width: 270px;
+}
+
+.link-casino
+{
+	width: 400px;
+	height: 50px;
+	border-radius: 15px;
+	background-color: #FF6600;
+	text-align: center;
+	padding: 0;
+	margin: 15px auto;
+}
+.link-casino a
+{
+	line-height: 50px;
+    vertical-align: middle;
+	color: white;
+	margin: auto;
+}
+.link-casino a:hover
+{
+	text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+/*
+	Стиль для представления рейтинга казино
+*/
+.rating-block{
+	max-width: 500px;
+	text-align: center;
+	border: solid 1px #D8D4D4;
+	padding: 10px;
+}
+.rating-link{
+	width: 100%;
+	height: 50px;
+	border-radius: 15px;
+	background-color: #FF6600;
+	text-align: center;
+	padding: 0;
+	margin: 15px auto;
+}
+.rating-link a
+{
+	line-height: 50px;
+    vertical-align: middle;
+	color: white;
+	margin: auto;
+}
+.rating-link a:hover
+{
+	text-decoration: none;
+}
+
+
+
+
+/*
+	Стиль для "таблицы" под лого казино
+*/
+
+.info
+{
+	text-align: left;
+	font-size: 0.8em;
+	font-weight: bold;
+	width: 90%;
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+
+
+.link-casino-bonus
+{
+	width: 100%;
+	height: 50px;
+	border-radius: 15px;
+	background-color: #FF6600;
+	text-align: center;
+	padding: 0;
+	margin: 15px auto;
+}
+.link-casino-bonus a
+{
+	line-height: 50px;
+	vertical-align: middle;
+	color: white;
+	margin: auto;
+	text-decoration: none;
+}
+.link-casino-bonus a:hover
+{
+	text-decoration: none;
+}
+
+
+
+.ya-share{
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+
+
