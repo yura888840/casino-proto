@@ -11,6 +11,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginController extends AbstractController
 {
+    private const SMTHNG_WRONG = 'Something went wrong';
+
     /**
      * @Route("/login", name="login")
      */
