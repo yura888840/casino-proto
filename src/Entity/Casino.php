@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CasinoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,48 +22,89 @@ class Casino
     /**
      * @ORM\Column(type="text")
      */
-    private $logo;
+    private ?string $logo;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private ?string $imgRating;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private ?string $img300;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private ?string $name;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $shortDescription;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $linkToPartner;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $method;
+    private ?string $method;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $soft;
+    private ?string $soft;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $bonus;
+    private ?string $bonus;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $license;
+    private ?string $license;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $year;
+    private ?string $year;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $support;
+    private ?string $support;
 
     /**
      * @ORM\OneToOne(targetEntity=Page::class, inversedBy="casino", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
-    private $page;
+    private ?Page $page;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Feature::class, mappedBy="casinoBenefits",cascade={"persist"})
+     */
+    private Collection $benefits;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Feature::class, mappedBy="casinoLimitations", cascade={"persist"})
+     */
+    private Collection $limitations;
+
+    /**
+     * @ORM\Column(type="integer", options={"default": 0})
+     */
+    private $rating;
+
+    public function __construct()
+    {
+        $this->benefits = new ArrayCollection();
+        $this->limitations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -174,5 +217,154 @@ class Casino
         $this->page = $page;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Feature[]
+     */
+    public function getBenefits(): Collection
+    {
+        return $this->benefits;
+    }
+
+    public function addBenefit(Feature $feature): self
+    {
+        if (!$this->benefits->contains($feature)) {
+            $this->benefits[] = $feature;
+            $feature->setCasinoBenefits($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBenefit(Feature $feature): self
+    {
+        if ($this->benefits->removeElement($feature)) {
+            // set the owning side to null (unless already changed)
+            if ($feature->getCasinoBenefits() === $this) {
+                $feature->setCasinoBenefits(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Feature[]
+     */
+    public function getLimitations(): Collection
+    {
+        return $this->limitations;
+    }
+
+    public function addLimitation(Feature $feature): self
+    {
+        if (!$this->limitations->contains($feature)) {
+            $this->limitations[] = $feature;
+            $feature->setCasinoLimitations($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLimitation(Feature $feature): self
+    {
+        if ($this->limitations->removeElement($feature)) {
+            // set the owning side to null (unless already changed)
+            if ($feature->getCasinoLimitations() === $this) {
+                $feature->setCasinoLimitations(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShortDescription()
+    {
+        return $this->shortDescription;
+    }
+
+    /**
+     * @param mixed $shortDescription
+     */
+    public function setShortDescription($shortDescription): self
+    {
+        $this->shortDescription = $shortDescription;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLinkToPartner()
+    {
+        return $this->linkToPartner;
+    }
+
+    /**
+     * @param mixed $linkToPartner
+     */
+    public function setLinkToPartner($linkToPartner): self
+    {
+        $this->linkToPartner = $linkToPartner;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
+    /**
+     * @param mixed $rating
+     */
+    public function setRating($rating): void
+    {
+        $this->rating = $rating;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImgRating(): ?string
+    {
+        return $this->imgRating;
+    }
+
+    /**
+     * @param string|null $imgRating
+     */
+    public function setImgRating(?string $imgRating): void
+    {
+        $this->imgRating = $imgRating;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImg300(): ?string
+    {
+        return $this->img300;
+    }
+
+    /**
+     * @param string|null $img300
+     */
+    public function setImg300(?string $img300): void
+    {
+        $this->img300 = $img300;
     }
 }

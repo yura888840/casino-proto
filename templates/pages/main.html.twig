@@ -6,6 +6,7 @@
             <div class="col-lg-8 col-md-8 col-sm-12">
                 <!-- начало столбца для контента -->
 
+                {{ include('_parts/main/content1_main.html.twig') }}
             {{ page.content1 | raw }}
 
             </div> <!-- конец столбца для контента -->
@@ -21,6 +22,7 @@
                 <!-- начало столбца для контента -->
 
                 {{ page.content2 | raw }}
+                {{ include('_parts/main/content2_main.html.twig') }}
 
             </div> <!-- конец столбца для контента -->
         </div> <!-- конец столбца row -->

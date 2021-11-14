@@ -5,14 +5,14 @@
     <div class="row">
 
         <div class="col-lg-3 col-md-3 col-sm-12 column-left">
-            {{ casino.logo | raw }}
+            <img src="{{ casino.logo | raw }}" alt="{{ casino.name | upper }} Casino" class="casino-logo">
             {{ include('_parts/casino_table.html.twig') }}
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
-            {{ page.content1 | raw }}
+            {{ include('_parts/casino_content1.html.twig') }}
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
-            {{ page.contentTable | raw }}
+            {{ include('_parts/casino_right_column.html.twig') }}
         </div>
 
     </div> <!-- конец столбца row -->

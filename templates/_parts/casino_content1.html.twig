@@ -1,0 +1,13 @@
+<main>
+    <header>
+        <h1>Обзор казино {{ casino.name | upper }}</h1>
+    </header>
+
+    <article>
+        {{ page.content1 | raw }}
+    </article>
+
+    <div class="link-casino">
+        <a href="{{ casino.linkToPartner }}" target="_blank">Перейти на сайт {{ casino.name | upper }}</a>
+    </div>
+</main>

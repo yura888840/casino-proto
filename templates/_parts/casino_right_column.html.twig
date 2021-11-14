@@ -1,0 +1,51 @@
+<table class="table table-dark" style="text-align: center">
+    <thead>
+    <tr>
+        <th>Место в рейтиге</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td style="font-size: 5em;">{{ casino.rating }}</td>
+    </tr>
+    <tr>
+        <td>{{ casino.rating }} из ...</td>
+    </tr>
+    </tbody>
+</table>
+
+<table class="table table-success">
+    <thead>
+    <tr>
+        <th>Преимущества</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for benefit in casino.benefits %}
+        <tr>
+            <td>{{ benefit.description }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<table class="table table-danger">
+    <thead>
+    <tr>
+        <th>Недостатки</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if casino.limitations is empty %}
+    <tr>
+        <td>Нет</td>
+    </tr>
+    {% else %}
+    {% for limitation in casino.limitations %}
+        <tr>
+            <td>{{ limitation.description }}</td>
+        </tr>
+    {% endfor %}
+    {% endif %}
+    </tbody>
+</table>

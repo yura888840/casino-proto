@@ -1,5 +1,12 @@
 <nav class="rating-block">
 
+    {% for i, casino in menu.casinos %}
+        <div class="bg-dark rating-{% if i == 0 %}first{% else %}casino{% endif %}">
+            <a href="/casino/{{ casino.name }}"><img src="{{ casino.imgRating }}" alt="{{ casino.name | capitalize }} Casino"></a>
+            <a href="/casino/{{ casino.name }}">{{ casino.name | capitalize }} Casino</a>
+        </div>
+    {% endfor %}
+<!--
     <div class="bg-dark rating-first">
         <a href="/casino/vavada.php"><img src="/images/rating/vavada-1-150x120.png.webp" alt="Vavada Casino"></a>
         <a href="/casino/vavada.php">Vavada Casino</a>
@@ -12,7 +19,7 @@
 
     <div class="bg-dark rating-casino">
         <a href="/casino/energywin.php"><img src="/images/rating/energywin-casino-logo-140x70.jpg" alt="EnergyWin Casino"></a>
-        <a href="/casino/energywin.php">EnergyW?> in Casino</a>
+        <a href="/casino/energywin.php">Energy in Casino</a>
     </div>
 
     <div class="bg-dark rating-casino">
@@ -59,6 +66,7 @@
         <a href="/casino/rox.php"><img src="/images/rating/rox-140x70.jpg" alt="ROX Casino"></a>
         <a href="/casino/rox.php">ROX Casino</a>
     </div>
+    -->
     <!--
         <div class="bg-dark rating-casino">
             <a href="/casino/riobet.php"><img src="/images/rating/riobet.jpg" alt="RioBet Casino"></a>
@@ -66,6 +74,7 @@
         </div>
     -->
 
+    <!--
     <div class="bg-dark rating-casino">
         <a href="/casino/redstar.php"><img src="/images/rating/redstar_1.jpg" alt="RedSar Casino"></a>
         <a href="/casino/redstar.php">RedSar Casino</a>
@@ -90,4 +99,5 @@
         <a href="/casino/casino-x.php"><img src="/images/rating/casino-x-140x70.png" alt="Casino-X"></a>
         <a href="/casino/casino-x.php">Casino-X</a>
     </div>
+    -->
 </nav>

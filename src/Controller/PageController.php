@@ -6,6 +6,7 @@ use App\Entity\Casino;
 use App\Entity\Page;
 use App\Repository\CasinoRepository;
 use App\Repository\PageRepository;
+use App\Service\MenuService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class PageController extends AbstractController
 {
     private const SMTHNG_WRONG = 'Something went wrong';
+
+    private MenuService $menuService;
+
+    public function __construct(MenuService $menuService)
+    {
+        $this->menuService = $menuService;
+    }
 
     /**
      * @Route("/", name="main")
@@ -38,6 +46,8 @@ class PageController extends AbstractController
             'pages/main.html.twig',
             [
                 'page' => $page,
+                'menu' => $this->menuService->fetchDataForMenu(),
+                'casinos_by_rates' => $this->menuService->fetchCasinosByRate(),
             ]
         );
     }
@@ -60,6 +70,7 @@ class PageController extends AbstractController
             [
                 'page' => $casino->getPage(),
                 'casino' => $casino,
+                'menu' => $this->menuService->fetchDataForMenu(),
             ]
         );
     }

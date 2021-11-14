@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Casino;
+use App\Entity\Feature;
 use App\Entity\Page;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -31,6 +32,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Pages', null, Page::class);
         yield MenuItem::linkToCrud('Casinos', null, Casino::class);
+        yield MenuItem::linkToCrud('Casino Features', null, Feature::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

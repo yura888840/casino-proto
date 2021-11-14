@@ -19,6 +19,16 @@ class CasinoRepository extends ServiceEntityRepository
         parent::__construct($registry, Casino::class);
     }
 
+    public function findCasinosByRating()
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.rating', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Casino[] Returns an array of Casino objects
     //  */

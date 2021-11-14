@@ -20,48 +20,48 @@ class Page
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private ?string $title;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $keywords;
+    private ?string $keywords;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $addition;
+    private ?string $addition;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $content1;
+    private ?string $content1;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $content2;
+    private ?string $content2;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $contentTable;
+    private ?string $contentTable;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
      * @var boolean
      */
-    private $main = false;
+    private bool $main = false;
 
     /**
      * @ORM\OneToOne(targetEntity=Casino::class, mappedBy="page", cascade={"persist", "remove"})
      */
-    private $casino;
+    private ?Casino $casino;
 
     public function getId(): ?int
     {
@@ -157,8 +157,13 @@ class Page
         return $this->casino;
     }
 
-    public function setCasino(Casino $casino): self
+    public function setCasino(?Casino $casino): self
     {
+        if ($casino === null) {
+            $this->casino = null;
+
+            return $this;
+        }
         // set the owning side of the relation if necessary
         if ($casino->getPage() !== $this) {
             $casino->setPage($this);
@@ -171,7 +176,7 @@ class Page
 
     public function __toString()
     {
-        return $this->title;
+        return (string) $this->title;
     }
 
     /**

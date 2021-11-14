@@ -3,13 +3,19 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Casino;
+use App\Entity\Feature;
+use App\Form\LimitationsType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use SebastianBergmann\CodeCoverage\Report\Text;
+use App\Form\BenefitsType;
 
 class CasinoCrudController extends AbstractCrudController
 {
@@ -17,7 +23,6 @@ class CasinoCrudController extends AbstractCrudController
     {
         return Casino::class;
     }
-
 
     public function configureFields(string $pageName): iterable
     {
@@ -34,7 +39,22 @@ class CasinoCrudController extends AbstractCrudController
             yield TextField::new('logo')
                 ->setRequired(true);
 
+            yield TextField::new('imgRating')
+                ->setRequired(true);
+
+            yield TextField::new('img300')
+                ->setRequired(true);
+
             yield TextField::new('name')
+                ->setRequired(true);
+
+            yield TextareaField::new('shortDescription')
+                ->setRequired(true);
+
+            yield TextField::new('linkToPartner')
+                ->setRequired(true);
+
+            yield IntegerField::new('rating')
                 ->setRequired(true);
 
             yield TextField::new('method');
@@ -48,20 +68,49 @@ class CasinoCrudController extends AbstractCrudController
             yield TextField::new('year');
 
             yield TextField::new('support');
+
+            yield CollectionField::new('benefits')
+                ->setFormTypeOptions([
+                    'delete_empty' => true,
+                    'by_reference' => false,
+                ])
+                ->setEntryIsComplex(false)
+                ->setCustomOptions([
+                    'allowAdd' => true,
+                    'allowDelete' => true,
+                    'entryType' => BenefitsType::class,
+                    'showEntryLabel' => false,
+                ]);
+
+            yield CollectionField::new('limitations')
+                ->setFormTypeOptions([
+                    'delete_empty' => true,
+                    'by_reference' => false,
+                ])
+                ->setEntryIsComplex(false)
+                ->setCustomOptions([
+                    'allowAdd' => true,
+                    'allowDelete' => true,
+                    'entryType' => LimitationsType::class,
+                    'showEntryLabel' => false,
+                ]);
         }
 
         if (Crud::PAGE_INDEX === $pageName)
         {
             yield AssociationField::new('page')
                 ->autocomplete()
+                ->renderAsNativeWidget(true)
                 ->setRequired(true);
 
-            yield TextareaField::new('logo')
+            yield ImageField::new('logo')
                 ->setRequired(true);
 
             yield TextField::new('name')
                 ->setRequired(true);
 
+            yield IntegerField::new('rating')
+                ->setRequired(true);
         }
     }
 

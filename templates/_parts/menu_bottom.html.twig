@@ -1,20 +1,9 @@
 <nav class="container-fluid bg-dark nav-bottom">
 
-    <a href="/casino/vavada.php">Vavada Casino</a>
-    <a href="/casino/pokermatch.php">Pokermatch Casino</a>
-    <a href="/casino/jvspin.php">JVSpin Casino</a>
-    <a href="/casino/casinoin.php">Casinoin</a>
-    <a href="/casino/joy_casino.php">Joy Casino</a>
-    <a href="/casino/casino-x.php">Casino-X</a>
-    <a href="/casino/jet_casino.php">Jet Casino</a>
-    <a href="/casino/fastpay.php">Fastpay Casino</a>
-    <a href="/casino/parimatch.php">PariMatch Casino</a>
-    <a href="/casino/slotum.php">Slotum Casino</a>
-    <a href="/casino/rox.php">ROX Casino</a>
-    <a href="/casino/riobet.php">RioBet Casino</a>
-    <a href="/casino/redstar.php">RedSar Casino</a>
-    <a href="/casino/marathonbet.php">MarathonBet Casino</a>
-    <a href="/casino/reel_casino.php">Reel Emperor Casino</a>
+    {% for casino in menu.casinos %}
+        <a href="/casino/{{ casino.name }}">{{ casino.name | capitalize }}  Casino</a>
+    {% endfor %}
+
 
     <a href="/rating/rating_online_casino_ukraine.php">рейтинг онлайн казино Украины</a>
     <a href="/rating/casino_na_grivny.php">казино на гривны</a>
