@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Page;
 use App\Repository\PageRepository;
+use App\Service\MenuService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,6 +13,13 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController extends AbstractController
 {
     private const SMTHNG_WRONG = 'Something went wrong';
+
+    private MenuService $menuService;
+
+    public function __construct(MenuService $menuService)
+    {
+        $this->menuService = $menuService;
+    }
 
     /**
      * @Route("/login", name="login")
@@ -40,6 +48,7 @@ class LoginController extends AbstractController
             'last_username' => $lastUsername,
             'error'         => $error,
             'page' => $page,
+            'menu' => $this->menuService->fetchDataForMenu(),
         ]);
     }
 }
