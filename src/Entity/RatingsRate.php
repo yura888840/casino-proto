@@ -73,7 +73,7 @@ class RatingsRate
     {
         $this->casino = $casino;
 
-        $casino?->addRatingsRate($this);
+        $casino->addRatingsRate($this);
 
         return $this;
     }

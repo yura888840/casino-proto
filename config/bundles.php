@@ -13,4 +13,10 @@ return [
     Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
     EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle::class => ['all' => true],
+    KMS\FroalaEditorBundle\KMSFroalaEditorBundle::class => ['all' => true],
+    Knp\Bundle\MenuBundle\KnpMenuBundle::class => ['all' => true],
+    Http\HttplugBundle\HttplugBundle::class => ['all' => true],
+    Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
+    SymfonyCasts\Bundle\VerifyEmail\SymfonyCastsVerifyEmailBundle::class => ['all' => true],
+    HtmlSanitizer\Bundle\HtmlSanitizerBundle::class => ['all' => true],
 ];

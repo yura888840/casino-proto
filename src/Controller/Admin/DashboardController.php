@@ -44,6 +44,12 @@ class DashboardController extends AbstractDashboardController
                 ]
             );
         yield MenuItem::linkToLogout('Logout', 'fa fa-sign-out');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+
+
+       // yield MenuItem::linkToCrud('Users', 'fa fa-users', User::class);
+       // yield MenuItem::linkToCrud('Blog Posts', 'fa fa-file-text-o', Post::class);
+        //yield MenuItem::linkToCrud('Comments', 'far fa-comments', Comment::class);
+        //yield MenuItem::linkToCrud('Tags', 'fas fa-tags', Tag::class);
+
     }
 }
