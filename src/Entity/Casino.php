@@ -100,10 +100,17 @@ class Casino
      */
     private $rating;
 
+    /**
+     * @ORM\OneToMany(targetEntity=RatingsRate::class, mappedBy="casino", cascade={"persist"}, orphanRemoval=true)
+     */
+    private $ratingsRates;
+
     public function __construct()
     {
         $this->benefits = new ArrayCollection();
         $this->limitations = new ArrayCollection();
+        $this->ratingsRates = new ArrayCollection();
+        $this->casinoRatings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -366,5 +373,52 @@ class Casino
     public function setImg300(?string $img300): void
     {
         $this->img300 = $img300;
+    }
+
+
+    /**
+     * @return Collection|RatingsRate[]
+     */
+    public function getRatingsRates(): Collection
+    {
+        return $this->ratingsRates;
+    }
+
+    public function addRatingsRate(RatingsRate $ratingsRate): self
+    {
+        if (!$this->ratingsRates->contains($ratingsRate)) {
+            $this->ratingsRates[] = $ratingsRate;
+            $ratingsRate->setCasino($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRatingsRate(RatingsRate $ratingsRate): self
+    {
+        if ($this->ratingsRates->removeElement($ratingsRate)) {
+            // set the owning side to null (unless already changed)
+            if ($ratingsRate->getCasino() === $this) {
+                $ratingsRate->setCasino(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCasinoRatings(): ArrayCollection
+    {
+        return $this->casinoRatings;
+    }
+
+    /**
+     * @param ArrayCollection $casinoRatings
+     */
+    public function setCasinoRatings(ArrayCollection $casinoRatings): void
+    {
+        $this->casinoRatings = $casinoRatings;
     }
 }

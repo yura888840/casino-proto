@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Casino;
+use App\Entity\CasinoRating;
 use App\Entity\Page;
+use App\Repository\CasinoRatingRepository;
 use App\Repository\CasinoRepository;
 use App\Repository\PageRepository;
 use App\Service\MenuService;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -78,9 +81,35 @@ class PageController extends AbstractController
     /**
      * @Route("/rating/{ratingName}")
      * @param Request $request
+     * @param string $ratingName
+     * @param CasinoRatingRepository $repository
+     * @return Response
      */
-    public function ratingPage(Request $request, string $ratingName): Response
+    public function ratingPage(Request $request, string $ratingName, CasinoRatingRepository $repository, PageRepository $pageRepository): Response
     {
-        return $this->redirect($this->generateUrl('main'));
+        /** @var CasinoRating $rating */
+        $rating = $repository->findOneBy(['slug' => $ratingName]);
+
+        if (!$rating) {
+            return $this->redirect($this->generateUrl('main'));
+        }
+
+        return $this->render(
+            'pages/rating.html.twig',
+            [
+                'page' => $pageRepository->findOneBy(['main' => true]),
+                'rating' => $rating,
+                'rating_casinos' => $this->sortByRate($rating->getRatingsCasinosRates()),
+                'menu' => $this->menuService->fetchDataForMenu(),
+            ]
+        );
+    }
+
+    private function sortByRate(Collection $rates): array
+    {
+        $ratesArray = $rates->toArray();
+        usort($ratesArray, fn($a, $b) => $a->getRate() <=> $b->getRate());
+
+        return $ratesArray;
     }
 }

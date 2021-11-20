@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Dto\MenuDto;
 use App\Repository\CasinoRepository;
-
+//MenuBuilder
 class MenuService
 {
     private CasinoRepository $casinoRepository;
@@ -14,6 +14,7 @@ class MenuService
         $this->casinoRepository = $casinoRepository;
     }
 
+    //build
     public function fetchDataForMenu(): MenuDto
     {
         return new MenuDto(
@@ -22,6 +23,7 @@ class MenuService
     }
 
     //@todo move to another service / class
+    //Rates / FetchCasinosByRates(Rate)
     public function fetchCasinosByRate()
     {
         return new MenuDto(

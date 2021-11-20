@@ -2,6 +2,7 @@
 
 namespace App\Dto;
 
+//Move to - Services/Menu
 class MenuDto
 {
     private array $casinos;
@@ -18,6 +19,5 @@ class MenuDto
     {
         return $this->casinos;
     }
-
 
 }
