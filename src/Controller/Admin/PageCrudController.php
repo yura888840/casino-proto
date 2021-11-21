@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CodeEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -43,13 +44,22 @@ class PageCrudController extends AbstractCrudController
                 ->autocomplete()
                 ->setRequired(false);
 
-            yield TextAreaField::new('addition');
+            yield CodeEditorField::new('addition')->hideOnIndex()
+                ->setNumOfRows(15)->setLanguage('markdown')
+                ->setHelp('Use Markdown to format the blog post contents. HTML is allowed too.');
 
-            yield TextAreaField::new('content1');
+            yield CodeEditorField::new('content1')->hideOnIndex()
+                ->setNumOfRows(15)->setLanguage('markdown')
+                ->setHelp('Use Markdown to format the blog post contents. HTML is allowed too.');
 
-            yield TextAreaField::new('content2');
+            yield CodeEditorField::new('content2')->hideOnIndex()
+                ->setNumOfRows(15)->setLanguage('markdown')
+                ->setHelp('Use Markdown to format the blog post contents. HTML is allowed too.');
 
-            yield TextAreaField::new('contentTable');
+            yield CodeEditorField::new('contentTable')->hideOnIndex()
+                ->setNumOfRows(15)->setLanguage('markdown')
+                ->setHelp('Use Markdown to format the blog post contents. HTML is allowed too.');
+
         }
 
         if (Crud::PAGE_INDEX === $pageName)

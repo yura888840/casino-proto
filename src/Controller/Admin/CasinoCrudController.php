@@ -8,6 +8,7 @@ use App\Form\LimitationsType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CodeEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -47,9 +48,10 @@ class CasinoCrudController extends AbstractCrudController
 
             yield TextField::new('name')
                 ->setRequired(true);
-
-            yield TextareaField::new('shortDescription')
-                ->setRequired(true);
+            
+            yield CodeEditorField::new('shortDescription')->hideOnIndex()
+                ->setNumOfRows(15)->setLanguage('markdown')->setRequired(true)
+                ->setHelp('Use Markdown to format the blog post contents. HTML is allowed too.');
 
             yield TextField::new('linkToPartner')
                 ->setRequired(true);
