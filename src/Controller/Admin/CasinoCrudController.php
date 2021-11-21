@@ -48,7 +48,7 @@ class CasinoCrudController extends AbstractCrudController
 
             yield TextField::new('name')
                 ->setRequired(true);
-            
+
             yield CodeEditorField::new('shortDescription')->hideOnIndex()
                 ->setNumOfRows(15)->setLanguage('markdown')->setRequired(true)
                 ->setHelp('Use Markdown to format the blog post contents. HTML is allowed too.');

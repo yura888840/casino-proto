@@ -4,25 +4,26 @@
     <div class="container" style="margin-top: 20px">
         <div class="row">
 
-            <main>
                 <header style="margin-top: 20px">
                     <h1>{{ rating.name }}</h1>
                 </header>
 
-                <article>
-                    {% for rating_casino in rating_casinos %}
-                        <div class="row main-block">
-                            <div class="col-lg-4 col-md-4 col-sm-4 main-block-img">
-                                <img src="{{ rating_casino.casino.img300 }}" alt="Казино {{ rating_casino.casino.name | upper }}">
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 main-block-txt">
-                                {{ rating_casino.casino.shortDescription }}
-                                <a href="/casino/{{ rating_casino.casino.name }}">Обзор казино {{ rating_casino.casino.name | upper }}</a>
-                            </div>
+                {% for rating_casino in rating_casinos %}
+
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                        <div class="rating-block">
+                            <a href="/casino/{{ rating_casino.casino.name }}"><img src="{{ rating_casino.casino.img300 }}" alt="Казино {{ rating_casino.casino.name | upper }}" class="casino-logo"></a>
+                            {% set casino = rating_casino.casino %}
+                            {% set content %}
+                                {% include '_parts/casino_table1.html.twig' %}
+                            {% endset %}
+                            {{ content }}
+                            <div class="rating-link"><a href="{{ rating_casino.casino.LinkToPartner }}">Перейти на сайт {{ rating_casino.casino.name  }}</a></div>
                         </div>
-                    {% endfor %}
-                </article>
-            </main>
+                    </div>
+
+                {% endfor %}
+
 
         </div> <!-- конец столбца row -->
     </div> <!-- конец столбца container -->
@@ -31,7 +32,7 @@
         <div class="row">
 
             <div class="col-lg-12 col-md-12 col-sm-12">
-                {{ page.content2 | raw }}
+                {{ rating.content2 | raw }}
             </div>
 
         </div> <!-- конец столбца row -->
