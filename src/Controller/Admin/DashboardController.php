@@ -6,6 +6,7 @@ use App\Entity\Casino;
 use App\Entity\CasinoRating;
 use App\Entity\Feature;
 use App\Entity\Page;
+use App\Entity\Post;
 use App\Entity\RatingsRate;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -43,6 +44,7 @@ class DashboardController extends AbstractDashboardController
                     MenuItem::linkToCrud('Rates', null, RatingsRate::class)
                 ]
             );
+        yield MenuItem::linkToCrud('Blog Posts', 'fa fa-file-text-o', Post::class);
         yield MenuItem::linkToLogout('Logout', 'fa fa-sign-out');
 
 

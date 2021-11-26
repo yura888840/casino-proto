@@ -1,39 +1,94 @@
+#security:
+#    enable_authenticator_manager: true
+#    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+#    password_hashers:
+#        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+#    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+#    providers:
+#        backend_users:
+#            memory:
+#                users:
+#                    admin: { password: '$2y$13$670dPa36s/BAFIGkMM31W.GinALhyFAbRCpM2JEqL14uC3gmlCusO', roles: ['ROLE_ADMIN'] }
+#    firewalls:
+#        dev:
+#            pattern: ^/(_(profiler|wdt)|css|images|js)/
+#            security: false
+#        main:
+#            lazy: true
+#            provider: backend_users
+#
+#
+#            form_login:
+#              # "login" is the name of the route created previously
+#              login_path: login
+#              check_path: login
+#              enable_csrf: true
+#
+#            logout:
+#                path: app_logout
+#            # activate different ways to authenticate
+#            # https://symfony.com/doc/current/security.html#the-firewall
+#
+#            # https://symfony.com/doc/current/security/impersonating_user.html
+#            # switch_user: true
+#
+#    # Easy way to control access for large sections of your site
+#    # Note: Only the *first* access control that matches will be used
+#    access_control:
+#         - { path: ^/admin, roles: ROLE_ADMIN }
+#        # - { path: ^/profile, roles: ROLE_USER }
+#######  OLD CONFIG
+
+
+
+
 security:
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
-        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        #######Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        App\Entity\User: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        backend_users:
-            memory:
-                users:
-                    admin: { password: '$2y$13$670dPa36s/BAFIGkMM31W.GinALhyFAbRCpM2JEqL14uC3gmlCusO', roles: ['ROLE_ADMIN'] }
+        #######backend_users:
+        #######memory:
+        #######users:
+        #######admin: { password: '$2y$13$670dPa36s/BAFIGkMM31W.GinALhyFAbRCpM2JEqL14uC3gmlCusO', roles: ['ROLE_ADMIN'] }
+        database_users:
+            entity: { class: App\Entity\User, property: username }
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            provider: backend_users
-
+            #######provider: backend_users
+            provider: database_users
 
             form_login:
-              # "login" is the name of the route created previously
-              login_path: login
-              check_path: login
-              enable_csrf: true
+                # "login" is the name of the route created previously
+                login_path: login
+                check_path: login
+                enable_csrf: true
+                default_target_path: main
 
             logout:
                 path: app_logout
+                target: main
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
+            entry_point: 'form_login'
 
+            access_denied_url: main
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: '^/(%app_locales%)/admin', roles: ROLE_ADMIN }
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER

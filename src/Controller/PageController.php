@@ -5,11 +5,14 @@ namespace App\Controller;
 use App\Entity\Casino;
 use App\Entity\CasinoRating;
 use App\Entity\Page;
+use App\Entity\Post;
 use App\Repository\CasinoRatingRepository;
 use App\Repository\CasinoRepository;
 use App\Repository\PageRepository;
+use App\Repository\PostRepository;
 use App\Service\MenuService;
 use Doctrine\Common\Collections\Collection;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,15 +30,17 @@ class PageController extends AbstractController
     }
 
     /**
-     * @Route("/", name="main")
+     * @Route("/", defaults={"page": "1", "_format"="html"}, methods="GET", name="main")
+     * @Route("/page/{page<[1-9]\d*>}", defaults={"_format"="html"}, methods="GET", name="blog_index_paginated")
+     * @Cache(smaxage="10")
      * @param Request $request
      */
-    public function mainPage(Request $request, PageRepository $repository): Response
+    public function mainPage(Request $request, PageRepository $repository, int $page, string $_format, PostRepository $posts): Response
     {
-        $page = $repository->findOneBy(['main' => true]);
-        if (!$page) {
+        $pageData = $repository->findOneBy(['main' => true]);
+        if (!$pageData) {
             //fallback
-            $page = (new Page())
+            $pageData = (new Page())
                 ->setDescription(self::SMTHNG_WRONG)
                 ->setTitle(self::SMTHNG_WRONG)
                 ->setAddition(self::SMTHNG_WRONG)
@@ -45,12 +50,16 @@ class PageController extends AbstractController
                 ->setKeywords(self::SMTHNG_WRONG);
         }
 
+        $tag = null;
+        $latestPosts = $posts->findLatest($page, $tag);
+
         return $this->render(
             'pages/main.html.twig',
             [
-                'page' => $page,
+                'page' => $pageData,
                 'menu' => $this->menuService->fetchDataForMenu(),
                 'casinos_by_rates' => $this->menuService->fetchCasinosByRate(),
+                'paginator' => $latestPosts,
             ]
         );
     }
@@ -111,5 +120,28 @@ class PageController extends AbstractController
         usort($ratesArray, fn($a, $b) => $a->getRate() <=> $b->getRate());
 
         return $ratesArray;
+    }
+
+
+    /**
+     * @Route("/posts/{slug}", methods="GET", name="blog_post")
+     * @param Request $request
+     */
+    public function blogpostPage(Request $request, Post $post): Response
+    {
+        $pageData = (new Page())
+            ->setDescription(self::SMTHNG_WRONG)
+            ->setTitle(self::SMTHNG_WRONG)
+            ->setAddition(self::SMTHNG_WRONG)
+            ->setContent1(self::SMTHNG_WRONG)
+            ->setContent2(self::SMTHNG_WRONG)
+            ->setContentTable(self::SMTHNG_WRONG)
+            ->setKeywords(self::SMTHNG_WRONG);
+
+        return $this->render('blog/post_show.html.twig', [
+            'post' => $post,
+            'page' => $pageData,
+            'menu' => $this->menuService->fetchDataForMenu(),
+        ]);
     }
 }
