@@ -5,10 +5,27 @@
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-12">
                 <!-- начало столбца для контента -->
+                <header style="margin-top: 20px">
+                    <h1>Рейтинг онлайн казино</h1>
+                </header>
 
-                {{ include('_parts/main/content1_main.html.twig') }}
-            {{ page.content1 | raw }}
                 {% for post in paginator.results %}
+                    <div class="row main-block">
+                        <div class="col-lg-4 col-md-4 col-sm-4 main-block-img">
+                            <img src="/uploads/images/products/{{ post.image }}" alt="{{ post.title }}">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-md-4 col-sm-4 main-block-txt">
+                            {{ post.title }}
+                            <p class="post-metadata">
+                                <span class="metadata"><i class="fa fa-calendar"></i> {{ post.publishedAt|format_datetime('long', 'medium', '', 'UTC') }}</span>
+                                <span class="metadata"><i class="fa fa-user"></i> {{ post.author.fullName }}</span>
+                            </p>
+                            <a href="{{ path('blog_post', {slug: post.slug}) }}">Читать..</a>
+                        </div>
+                    </div>
+
+
+                    <!--
                     <article class="post">
                         <h2>
                             <a href="{{ path('blog_post', {slug: post.slug}) }}">
@@ -23,8 +40,10 @@
 
                         <p>{{ post.summary }}</p>
 
+
                         {{ include('blog/_post_tags.html.twig') }}
                     </article>
+                    -->
                 {% else %}
                     <div class="well">{{ 'post.no_posts_found'|trans }}</div>
                 {% endfor %}
@@ -55,6 +74,8 @@
                     </div>
                 {% endif %}
 
+                {{ include('_parts/main/content1_main.html.twig') }}
+                {{ page.content1 | raw }}
             </div> <!-- конец столбца для контента -->
             <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
                 {{ include('_parts/menu_column.html.twig') }}

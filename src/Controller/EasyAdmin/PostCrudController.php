@@ -10,11 +10,19 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CodeEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class PostCrudController extends AbstractCrudController
 {
+    private string $uploadDir;
+
+    public function __construct(string $uploadDir)
+    {
+        $this->uploadDir = $uploadDir;
+    }
+
     public static function getEntityFqcn(): string
     {
         return Post::class;
@@ -46,5 +54,6 @@ class PostCrudController extends AbstractCrudController
         yield AssociationField::new('comments')->onlyOnIndex();
         yield DateTimeField::new('publishedAt');
         yield AssociationField::new('tags')->hideOnIndex();
+        yield ImageField::new('image')->setUploadDir($this->uploadDir)->setBasePath($this->uploadDir);
     }
 }
